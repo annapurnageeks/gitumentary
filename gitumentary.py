@@ -351,6 +351,16 @@ def find_twists(commits):
     return twists
 
 
+def where_most(f):
+    """Where most of a chapter's commits happened, or "" when no single area holds a majority."""
+    if not f["busiest_areas"]:
+        return ""
+    area, count = f["busiest_areas"][0]
+    if count * 2 <= f["commits"]:
+        return ""
+    return ", most of them at the top level" if area == "(root)" else f", most of them in {area}"
+
+
 def default_story(facts, total_people):
     """Write plain, factual narration. An AI narrator (see SKILL.md) can replace it with a better one."""
     chapters, used_titles = [], set()
@@ -367,13 +377,12 @@ def default_story(facts, total_people):
             text = f"It began on {long_date(f['first_time'])}, when {first['author']} made the first commit: “{quote}”"
             text += "" if quote[-1:] in ".!?" else "."
             if f["commits"] > 1:
-                text += f" Over the next {how_long}, {who} made {number(f['commits'])} commits"
-                text += f", most of them in {areas[0]}." if areas else "."
+                # "Over" rather than "Over the next": span() can return "a single day"
+                text += f" Over {how_long}, {who} made {number(f['commits'])} commits{where_most(f)}."
         else:
             title = "Where It Stands" if is_last else next(
                 (f"The {a} Era" for a in areas if f"The {a} Era" not in used_titles), f"Chapter {i + 1}")
-            text = f"Over {how_long}, {who} made {number(f['commits'])} commits"
-            text += f", most of them in {areas[0]}." if areas else "."
+            text = f"Over {how_long}, {who} made {number(f['commits'])} commits{where_most(f)}."
             if len(f["newcomers"]) == 1:
                 text += f" {f['newcomers'][0]} joined the cast."
             elif f["newcomers"]:
