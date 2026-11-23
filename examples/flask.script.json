@@ -1,0 +1,30 @@
+{
+  "title": "Flask",
+  "tagline": "The life of a microframework",
+  "chapters": [
+    {
+      "title": "Stuff That Exists So Far",
+      "narration": "On April 6, 2010, Armin Ronacher committed 984 lines with a modest message: “Initial checkin of stuff that exists so far.” Within fifteen months, sixty people had shown up, but Armin wrote 512 of the 668 commits himself. More commits touched the docs than the code. By the summer of 2011, Flask stood at 17,618 lines."
+    },
+    {
+      "title": "The Crowd Arrives",
+      "narration": "Version 0.7 shipped, and the crowd followed: 108 newcomers in two years, and the cast passed one hundred contributors. Armin still led with 323 commits; Ron DuPlain added 70. In August 2011, Armin split the test suite into its own package, moving nearly three thousand lines in a single commit."
+    },
+    {
+      "title": "Rewriting, Not Growing",
+      "narration": "After version 0.10, Armin's pace slowed to 121 commits in three years, and others stepped in. Markus Unterwaditzer made 87, including one that moved almost five thousand lines of tests. For every hundred lines added, eighty-seven were deleted. Flask was rewriting itself rather than growing."
+    },
+    {
+      "title": "David Lord Takes the Wheel",
+      "narration": "A contributor named David Lord, who had first appeared in 2015, became the project's most active author with 206 commits. In April 2018 he rewrote the tutorial from scratch. Seventeen days later, eight years after the first commit, Flask 1.0 was released."
+    },
+    {
+      "title": "Moving House",
+      "narration": "In June 2019, David Lord moved the entire codebase into a new src folder: 8,167 lines in one commit. Robots joined the cast, as dependabot and pre-commit-ci made 84 commits between them. Over the winter of 2019, the project went quiet for two and a half months. Then, in May 2021, Flask 2.0 arrived."
+    },
+    {
+      "title": "The Long Maintenance",
+      "narration": "Five years, and Flask grew by just 831 lines. David Lord made 416 of the 647 commits. On a single day in November 2021, he dropped Python 3.6 and removed a batch of deprecated features. Today Flask holds 35,523 lines, written by 858 people. Mature software, it turns out, mostly stays the same size."
+    }
+  ]
+}
