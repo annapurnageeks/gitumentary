@@ -114,6 +114,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Good first issues, if you want to help:
 
 Made a film? [Share it here](https://github.com/annapurnageeks/gitumentary/issues/new?template=share-a-film.yml). The best ones go in the gallery.
 
+## More from the same author
+
+**[commit-wrapped](https://github.com/annapurnageeks/commit-wrapped)** turns your own year of commits into a Spotify-Wrapped-style story with a card you can share. [Watch React's 2026 →](https://annapurnageeks.github.io/commit-wrapped/)
+
 ## License
 
 MIT
