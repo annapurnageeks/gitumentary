@@ -38,7 +38,7 @@ git clone https://github.com/annapurnageeks/gitumentary
 python3 gitumentary/gitumentary.py path/to/any/repo --open
 ```
 
-That's it: Python 3.9+ and git, nothing to install. You get `documentary.html`, a self-contained film you can watch, screen-record, or host anywhere.
+That's it: Python 3.9+ and git, nothing to install. Works on macOS, Linux and Windows. You get `documentary.html`, a self-contained film you can watch, screen-record, or host anywhere.
 
 ## Let an AI narrate it (much better)
 
