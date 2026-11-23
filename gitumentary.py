@@ -546,12 +546,15 @@ def render(story, output):
 
 def repo_name(repo):
     remote = subprocess.run(["git", "-C", str(repo), "remote", "get-url", "origin"],
-                            capture_output=True, text=True).stdout.strip()
+                            capture_output=True, text=True, encoding="utf-8", errors="replace").stdout.strip()
     match = re.search(r"[:/]([^/:]+/[^/]+?)(?:\.git)?/?$", remote)
     return match.group(1) if match else Path(repo).name
 
 
 def main():
+    # Windows may print with an old code page; never crash on an emoji or a contributor's name.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description="Turn a git repository's history into a short animated documentary.")
     parser.add_argument("repo", nargs="?", default=".", help="path to a git repository (default: this folder)")
     parser.add_argument("-o", "--output", default="documentary.html", help="where to write the film (default: documentary.html)")
@@ -563,7 +566,8 @@ def main():
     args = parser.parse_args()
 
     where = Path(args.repo).expanduser()
-    found = subprocess.run(["git", "-C", str(where), "rev-parse", "--show-toplevel"], capture_output=True, text=True)
+    found = subprocess.run(["git", "-C", str(where), "rev-parse", "--show-toplevel"], capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
     if found.returncode != 0:
         sys.exit(f"gitumentary: {where} is not inside a git repository.")
     repo = Path(found.stdout.strip())
