@@ -1,0 +1,30 @@
+{
+  "title": "React",
+  "tagline": "Thirteen years. Nearly two thousand people. A million lines.",
+  "chapters": [
+    {
+      "title": "Initial Public Release",
+      "narration": "On May 29, 2013, Paul O’Shannessy made the first commit: 36,866 lines, titled “Initial public release.” Over the next two years, Paul and Sophie Alpert made more than a thousand commits between them. 477 people joined in. By the summer of 2015, React stood at 124,866 lines."
+    },
+    {
+      "title": "A New Engine",
+      "narration": "The cast passed one thousand contributors. Dan Abramov, who had first appeared in 2014, led with 410 commits. On May 10, 2016, Sebastian Markbåge committed “React Fiber Reconciler”: a new core for React. It would ship with React 16, in September 2017."
+    },
+    {
+      "title": "Hooks",
+      "narration": "In October 2017, Dan Abramov moved the whole repository into packages, rewriting the paths of 78,170 lines in one commit. Then, in September 2018, Andrew Clark committed “Initial hooks implementation.” Five months later, React 16.8 put Hooks into the world."
+    },
+    {
+      "title": "Undo, Redo",
+      "narration": "On August 28, 2019, Brian Vaughn imported DevTools v4 into React. Four minutes later, he reverted it. Seventeen seconds after that, it came back through a merge that kept its whole history. Brian made 600 commits in this chapter. React 17 arrived in October 2020, and React 18 in March 2022."
+    },
+    {
+      "title": "Codename Forget",
+      "narration": "In a separate repository, a compiler codenamed Forget was taking shape. Joe Savona led with 835 commits, followed by Sathya Gunasekaran and Lauren Tan. In March 2024, that history was brought into React, and compiler/forget became the busiest folder in the project."
+    },
+    {
+      "title": "A Million Lines",
+      "narration": "React 19 arrived at the end of 2024. Sebastian Markbåge, there since the early days, made 685 more commits. On June 9, 2026, Joseph Savona ported the React Compiler to Rust, and React crossed one million lines. Today it holds 1,010,247 lines, written by 1,971 people. Not bad for an initial public release."
+    }
+  ]
+}
