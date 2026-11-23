@@ -63,6 +63,24 @@ class StoryTest(unittest.TestCase):
         languages = {a["name"]: a["language"] for a in story["areas"]}
         self.assertEqual(languages["src"], "Python")
 
+    def test_default_narration_reads_well_for_a_young_repo(self):
+        make_repo(self.repo, [(0, "Ada", f"Start {i}", {"app.py": lines(5 + i)}) for i in range(4)] +
+                             [(100 + i, "Ada", f"Later {i}", {"src/b.py": lines(30 + i)}) for i in range(4)] +
+                             [(200 + i, "Ada", f"Last {i}", {"src/c.py": lines(30 + i)}) for i in range(4)])
+        story, facts = gitumentary.build_story(self.repo, "demo", keep_everything=False)
+        first = story["chapters"][0]["narration"]
+        self.assertIn("Over a single day, Ada made 4 commits, most of them at the top level.", first)
+        self.assertNotIn("the next a single day", first)
+
+    def test_most_of_them_only_when_it_is_true(self):
+        chapter = lambda commits, busiest: {"commits": commits, "busiest_areas": busiest}
+        # the top level held 3 of 4 commits, so it must not name "examples"
+        self.assertEqual(gitumentary.where_most(chapter(4, [("(root)", 3), ("examples", 1)])),
+                         ", most of them at the top level")
+        self.assertEqual(gitumentary.where_most(chapter(4, [("src", 3), ("(root)", 1)])), ", most of them in src")
+        self.assertEqual(gitumentary.where_most(chapter(4, [("src", 2), ("docs", 2)])), "")  # no majority
+        self.assertEqual(gitumentary.where_most(chapter(2, [])), "")
+
     def test_deleted_and_noise_files_are_not_counted(self):
         make_repo(self.repo, [
             (0, "Ada", "Start", {"a.py": lines(10), "package-lock.json": lines(500)}),
