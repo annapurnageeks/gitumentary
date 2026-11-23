@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses [Semantic Versioning](https://semver.org/).
 
+## [0.1.1] - 2026-11-23
+
+### Fixed
+- Printing no longer crashes on Windows consoles that don't use UTF-8, such as one with the cp1252 code page. This affected the line printed after a film is written, and `--brief` with some contributor names.
+- The default narration no longer says "Over the next a single day" for histories shorter than about a day and a half.
+- "Most of them in…" now counts the top-level folder, and only names an area that really holds most of a chapter's commits.
+- Git's output pipes are closed after reading the history, so Python no longer warns about unclosed files.
+
+### Changed
+- CI also runs the tests on Windows, and uses `actions/checkout@v7` and `actions/setup-python@v7`.
+
 ## [0.1.0] - 2026-11-23
 
 The first release.
@@ -18,4 +29,5 @@ The first release.
 ### Fixed
 - Commits with out-of-order timestamps, such as those from an imported repository, no longer distort the timeline or create fake silences.
 
+[0.1.1]: https://github.com/annapurnageeks/gitumentary/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/annapurnageeks/gitumentary/releases/tag/v0.1.0
