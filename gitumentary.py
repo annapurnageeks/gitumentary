@@ -35,6 +35,7 @@ PROJECT_URL = "https://github.com/annapurnageeks/gitumentary"
 
 FRAMES_PER_CHAPTER = 40  # how many snapshots of the codebase the animation gets per chapter
 MAX_AREAS = 40           # the biggest folders get their own box; the rest are merged into "other"
+CREDITS = 40             # people named in the end credits (by number of commits); the rest are "and N more"
 
 # Generated or vendored files. Counting them would make the picture lie.
 NOISE_FILES = {
@@ -189,7 +190,9 @@ def replay(commits):
             else:
                 lines_in_file.pop(path, None)
             growth[area] += after - before
-            language_lines[area][language_of(path)] += added
+            language = language_of(path)
+            # Docs and config count for less, so a code folder full of test snapshots still reads as code.
+            language_lines[area][language] += added * (0.3 if language[0] in ("Docs", "Config") else 1)
         total += sum(growth.values())
         commit["growth"] = dict(growth)
         commit["areas"] = set(growth)
@@ -479,7 +482,7 @@ def build_story(repo, title, keep_everything):
             for i, f in enumerate(facts)
         ],
         "cast": [{"name": name, "commits": count, "since": datetime.fromtimestamp(first_seen[name], timezone.utc).year}
-                 for name, count in cast.most_common(120)],
+                 for name, count in cast.most_common(CREDITS)],
         "project_url": PROJECT_URL,
     }
     return story, facts

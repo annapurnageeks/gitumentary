@@ -192,7 +192,7 @@ S.chapters.forEach((ch, i) => {
   const words = ch.narration.split(/\s+/).length;
   addSegment("chapter", clamp(CARD + 1.6 + words / 3.1, 10, 23), { i });
 });
-addSegment("credits", clamp(8 + S.cast.length * 0.12, 10, 16));
+addSegment("credits", clamp(8 + S.cast.length * 0.3, 10, 20));
 const TOTAL = cursor;
 const segmentAt = (t) => { for (let i = segments.length - 1; i >= 0; i--) if (t >= segments[i].start) return segments[i]; return segments[0]; };
 // Within a chapter, the codebase grows while the narration plays, starting as the title card fades.
@@ -303,7 +303,7 @@ function drawTreemap(ci, st) {
     ctx.save();
     ctx.shadowColor = `rgba(${r},${gr},${bl},${0.9 * hot})`;
     ctx.shadowBlur = 26 * hot;
-    ctx.fillStyle = `rgba(${r},${gr},${bl},${0.38 + 0.55 * hot})`;
+    ctx.fillStyle = `rgba(${r},${gr},${bl},${0.6 + 0.4 * hot})`;
     ctx.beginPath();
     const radius = Math.min(6, bw / 4, bh / 4);
     if (ctx.roundRect) ctx.roundRect(b.x + gap / 2, b.y + gap / 2, bw, bh, radius); else ctx.rect(b.x + gap / 2, b.y + gap / 2, bw, bh);
