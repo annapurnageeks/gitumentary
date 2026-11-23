@@ -1,0 +1,26 @@
+name: 🐛 Bug report
+description: Something broke, or a film shows something the git history doesn't support.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the exact error, or the line in the film that's wrong.
+    validations:
+      required: true
+  - type: input
+    id: repo
+    attributes:
+      label: Repository you ran it on
+      description: A public URL if possible, so it can be reproduced.
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      placeholder: python3 gitumentary.py ../my-repo --open
+  - type: input
+    id: env
+    attributes:
+      label: Python version, OS and browser
+      placeholder: Python 3.12, macOS 15, Chrome 140

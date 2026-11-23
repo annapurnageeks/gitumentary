@@ -1,0 +1,31 @@
+name: 🎬 Share a film
+description: Made a gitumentary? Show it off. The best ones go in the gallery.
+title: "[Film] "
+labels: ["gallery"]
+body:
+  - type: input
+    id: repo
+    attributes:
+      label: Repository
+      description: Which project is the film about?
+      placeholder: https://github.com/owner/name
+    validations:
+      required: true
+  - type: input
+    id: film
+    attributes:
+      label: Link to the film or video
+      description: A hosted HTML file, a video, or a post that shows it.
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: The best moment
+      description: What's the most surprising thing the film revealed?
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Permission
+      options:
+        - label: I'm happy for this film to be featured in the gallery.

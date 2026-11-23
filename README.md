@@ -7,11 +7,27 @@
 Chapters. Narration. Plot twists. A cast of contributors. End credits.<br>
 One command, one HTML file, zero dependencies.
 
+[![CI](https://github.com/annapurnageeks/gitumentary/actions/workflows/ci.yml/badge.svg)](https://github.com/annapurnageeks/gitumentary/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/annapurnageeks/gitumentary)](https://github.com/annapurnageeks/gitumentary/releases)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3572A5)](#make-one-in-10-seconds)
+[![Zero dependencies](https://img.shields.io/badge/dependencies-0-f5b544)](gitumentary.py)
+[![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-d97757)](SKILL.md)
+[![MIT License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+
 <img src="assets/demo.gif" alt="A gitumentary of Flask: the codebase grows from one file in 2010 to 35,000 lines in 2026, with chapter titles and narration" width="800">
 
 **[▶ Watch the full Flask gitumentary](https://annapurnageeks.github.io/gitumentary/)**
 
 </div>
+
+### 🎞️ Gallery
+
+| Film | Story |
+|---|---|
+| [**React**](https://annapurnageeks.github.io/gitumentary/react/) · 2013–2026 | 19,200 commits, 1,971 people, one million lines. Fiber, Hooks, a DevTools import reverted after four minutes, and a compiler codenamed Forget. |
+| [**Flask**](https://annapurnageeks.github.io/gitumentary/) · 2010–2026 | “Initial checkin of stuff that exists so far.” Sixteen years of a microframework, and how it stopped growing but kept changing. |
+
+🎬 **Download the films as MP4** from the [latest release](https://github.com/annapurnageeks/gitumentary/releases/latest). Made one of a project you love? [Share it](https://github.com/annapurnageeks/gitumentary/issues/new?template=share-a-film.yml), and the best ones go in the gallery.
 
 ---
 
@@ -22,7 +38,7 @@ git clone https://github.com/annapurnageeks/gitumentary
 python3 gitumentary/gitumentary.py path/to/any/repo --open
 ```
 
-That's it: Python 3.8+ and git, nothing to install. You get `documentary.html`, a self-contained film you can watch, screen-record, or host anywhere.
+That's it: Python 3.9+ and git, nothing to install. You get `documentary.html`, a self-contained film you can watch, screen-record, or host anywhere.
 
 ## Let an AI narrate it (much better)
 
@@ -76,7 +92,9 @@ Write your own narration without an AI: run `--brief`, then fill in the JSON ske
 3. **Chapters**: it splits the history into 3–6 chapters, nudging each cut toward a release tag or a long pause, and collects facts about each one.
 4. **Render**: everything goes into [`player.html`](player.html) as JSON. The player draws a squarified treemap on a canvas and runs the timeline.
 
-It reads Flask's 3,800 commits in under a second.
+It reads Flask's 3,800 commits in under a second, and React's 19,200 in about nine.
+
+Run the tests with `python3 -m unittest discover tests`.
 
 ## Privacy
 
@@ -84,16 +102,17 @@ Everything runs locally. The film contains contributor **names** (no emails), co
 
 ## Ideas and contributions welcome
 
-Good first issues, if you want to help:
+See [CONTRIBUTING.md](CONTRIBUTING.md). Good first issues, if you want to help:
 
 - [ ] **Export to MP4/GIF** straight from the player
+- [ ] **Subtitles in sync with the timeline**: show each sentence when the map reaches the date it talks about
 - [ ] **Voice-over** using the browser's speech synthesis
 - [ ] **`--author "Name"`**: your personal story inside a project, for portfolios and performance reviews
 - [ ] **Run on a GitHub URL** directly (clone into a temp folder)
 - [ ] **Themes**: a light theme, a retro terminal theme, a "trailer" cut
 - [ ] **Music** that follows the activity level
 
-Open an issue with the most interesting gitumentary you've made. The best ones go in a gallery here.
+Made a film? [Share it here](https://github.com/annapurnageeks/gitumentary/issues/new?template=share-a-film.yml). The best ones go in the gallery.
 
 ## License
 
