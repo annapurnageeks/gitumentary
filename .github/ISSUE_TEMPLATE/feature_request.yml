@@ -1,0 +1,11 @@
+name: 💡 Idea
+description: Suggest something that would make films better.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What should gitumentary do, and why would it make films better?
+    validations:
+      required: true
