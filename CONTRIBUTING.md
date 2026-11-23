@@ -25,7 +25,7 @@ python3 gitumentary.py . --open         # make a film of gitumentary itself
 
 1. Keep each pull request focused on one change.
 2. Add or update a test in `tests/` when you change how history is read or counted.
-3. Make sure `python3 -m unittest discover tests` passes. CI runs it on Python 3.9 and 3.13.
+3. Make sure `python3 -m unittest discover tests` passes. CI runs it on Python 3.9 and 3.13, on Linux, macOS and Windows.
 4. Use a [conventional commit](https://www.conventionalcommits.org/) style title, such as `fix(history): ...` or `feat(player): ...`.
 
 ## Ground rules
