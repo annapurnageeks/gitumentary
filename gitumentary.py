@@ -115,10 +115,38 @@ def read_history(repo, keep_everything=False):
     error = process.stderr.read()
     if process.wait() != 0:
         sys.exit(f"gitumentary: could not read the history of {repo}\n{error.strip()}")
-    # Commit times can go slightly backwards (rebases, wrong clocks). Keep them in order.
-    for previous, commit in zip(commits, commits[1:]):
-        commit["time"] = max(commit["time"], previous["time"])
+    steady_times(commits)
     return commits
+
+
+def steady_times(commits, reach=12):
+    """Make commit times move forward only, without letting a few odd timestamps wreck the timeline.
+
+    Timestamps can be out of order: rebases, wrong clocks, or a whole repository imported with
+    rewritten dates. Simply forcing time forward would let one commit dated 2024 drag every
+    commit after it to 2024.
+
+    So a commit is treated as an outlier when it is out of order by more than 30 days: later
+    than the typical time of the commits that come after it, or earlier than the typical time
+    of the commits that came before it. Commits on the edge of a real pause are in order, so
+    real pauses are kept. An outlier takes the typical time of its neighbours; then time is
+    forced to move forward."""
+    times = [c["time"] for c in commits]
+    month = 30 * 86400
+
+    def median(values):
+        return sorted(values)[len(values) // 2]
+
+    latest = 0
+    for i, commit in enumerate(commits):
+        before, after = times[max(0, i - reach):i], times[i + 1:i + 1 + reach]
+        own = times[i]
+        too_late = after and own > median(after) + month
+        too_early = before and own < median(before) - month
+        if too_late or too_early:
+            own = median(before + after)
+        latest = max(latest, own)
+        commit["time"] = latest
 
 
 def read_tag_times(repo):
