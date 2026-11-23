@@ -158,6 +158,14 @@ class OutputTest(unittest.TestCase):
         self.assertIn("## Chapter 1", result.stdout)
         self.assertIn("Mallory", result.stdout)
 
+    def test_output_survives_a_non_utf8_console(self):
+        # Windows terminals and pipes may use an old code page such as cp1252
+        env = dict(os.environ, PYTHONIOENCODING="cp1252")
+        for args in [("--brief",), ("-o", str(Path(self.tmp.name) / "film.html"))]:
+            result = subprocess.run([sys.executable, str(ROOT / "gitumentary.py"), str(self.repo), *args],
+                                    capture_output=True, text=True, encoding="utf-8", env=env)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_not_a_repository(self):
         result = subprocess.run([sys.executable, str(ROOT / "gitumentary.py"), self.tmp.name],
                                 capture_output=True, text=True)
