@@ -98,23 +98,23 @@ def read_history(repo, keep_everything=False):
     """
     command = ["git", "-C", str(repo), "-c", "core.quotepath=off", "log", "--reverse", "--no-merges",
                "--no-renames", "--numstat", "--format=%x1e%h%x1f%ct%x1f%aN%x1f%s"]
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
-                               encoding="utf-8", errors="replace")
     commits = []
-    for line in process.stdout:
-        line = line.rstrip("\n")
-        if line.startswith("\x1e"):  # a new commit starts: hash, time, author, message
-            short_hash, timestamp, author, subject = line[1:].split("\x1f", 3)
-            commits.append({"hash": short_hash, "time": int(timestamp), "author": author,
-                            "subject": subject, "files": []})
-        elif line and commits:       # one changed file: "added<TAB>deleted<TAB>path"
-            added, deleted, path = line.split("\t", 2)
-            if added == "-":         # a binary file; git can't count its lines
-                continue
-            if keep_everything or not is_noise(path):
-                commits[-1]["files"].append((path, int(added), int(deleted)))
-    error = process.stderr.read()
-    if process.wait() != 0:
+    with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+                          encoding="utf-8", errors="replace") as process:
+        for line in process.stdout:
+            line = line.rstrip("\n")
+            if line.startswith("\x1e"):  # a new commit starts: hash, time, author, message
+                short_hash, timestamp, author, subject = line[1:].split("\x1f", 3)
+                commits.append({"hash": short_hash, "time": int(timestamp), "author": author,
+                                "subject": subject, "files": []})
+            elif line and commits:       # one changed file: "added<TAB>deleted<TAB>path"
+                added, deleted, path = line.split("\t", 2)
+                if added == "-":         # a binary file; git can't count its lines
+                    continue
+                if keep_everything or not is_noise(path):
+                    commits[-1]["files"].append((path, int(added), int(deleted)))
+        error = process.stderr.read()
+    if process.returncode != 0:
         sys.exit(f"gitumentary: could not read the history of {repo}\n{error.strip()}")
     steady_times(commits)
     return commits
