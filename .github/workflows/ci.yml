@@ -15,9 +15,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
-        python: ["3.9", "3.13"]
         include:
+          # the oldest supported Python; newer Ubuntu images no longer provide it
+          - os: ubuntu-24.04
+            python: "3.9"
+          - os: ubuntu-latest
+            python: "3.13"
           - os: macos-latest
             python: "3.13"
     steps:
